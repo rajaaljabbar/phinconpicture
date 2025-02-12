@@ -104,6 +104,7 @@
 
       function logout() {
         sessionStorage.removeItem("loggedIn");
+        alert("Anda telah logout");
         document.getElementById("gallery").style.display = "none";
         document.getElementById("loginBox").style.display = "block";
         document.getElementById("username").value = "";
@@ -112,8 +113,12 @@
 
       window.onload = function () {
         if (sessionStorage.getItem("loggedIn")) {
-          document.getElementById("loginBox").style.display = "none";
-          document.getElementById("gallery").style.display = "block";
+          if (confirm("Anda masih login, apakah ingin logout?")) {
+            logout();
+          } else {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("gallery").style.display = "block";
+          }
         }
       };
     </script>
