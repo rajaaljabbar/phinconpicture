@@ -22,6 +22,7 @@
       }
       .nav {
         margin: 20px;
+        display: none;
       }
       .nav a {
         display: block;
@@ -37,17 +38,132 @@
       .nav a:hover {
         background-color: #0056b3;
       }
+      .login-box {
+        max-width: 300px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: left;
+      }
+      .login-box h3 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      input {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: block;
+      }
+      .login-btn,
+      .logout-btn {
+        width: 100%;
+        padding: 10px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .login-btn {
+        background-color: #28a745;
+      }
+      .login-btn:hover {
+        background-color: #218838;
+      }
+      .logout-btn {
+        background-color: #dc3545;
+        margin-top: 20px;
+      }
+      .logout-btn:hover {
+        background-color: #c82333;
+      }
+      .error {
+        color: red;
+        display: none;
+        text-align: center;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Galeri Aset Phincon</h1>
-      <p>Pilih salah satu galeri berikut:</p>
-      <div class="nav">
+
+      <!-- Login Form -->
+      <div class="login-box" id="login-box">
+        <h3>Silakan Login</h3>
+        <input
+          type="text"
+          id="username"
+          placeholder="Username"
+          required
+          autocomplete="off"
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+          autocomplete="off"
+        />
+        <p class="error" id="error-message">Username atau password salah!</p>
+        <button class="login-btn" onclick="login()">Login</button>
+      </div>
+
+      <!-- Navigasi Galeri & Logout Button -->
+      <div class="nav" id="gallery-nav">
+        <p>Pilih salah satu galeri berikut:</p>
         <a href="Kokas.zip">Kokas Galeri</a>
         <a href="Batavia.zip">Batavia Galeri</a>
         <a href="Gancit.zip">Gancit Galeri</a>
+        <button class="logout-btn" onclick="logout()">Logout</button>
       </div>
     </div>
+
+    <script>
+      // Cek apakah user sudah login sebelumnya
+      window.onload = function () {
+        if (sessionStorage.getItem("loggedIn") === "true") {
+          showGallery();
+        } else {
+          logout(); // Hapus cache login jika ada
+        }
+      };
+
+      function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        if (username === "Phincon" && password === "GA2025") {
+          sessionStorage.setItem("loggedIn", "true");
+          showGallery();
+        } else {
+          document.getElementById("error-message").style.display = "block";
+        }
+      }
+
+      function logout() {
+        sessionStorage.removeItem("loggedIn");
+        document.getElementById("gallery-nav").style.display = "none";
+        document.getElementById("login-box").style.display = "block";
+
+        // Hapus cache input username & password
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+
+        // Sembunyikan pesan error jika ada
+        document.getElementById("error-message").style.display = "none";
+      }
+
+      function showGallery() {
+        document.getElementById("login-box").style.display = "none";
+        document.getElementById("gallery-nav").style.display = "block";
+      }
+    </script>
   </body>
 </html>
