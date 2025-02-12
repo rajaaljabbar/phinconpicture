@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Galeri Foto</title>
+    <title>Galeri Aset Phincon</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -20,9 +20,35 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
       }
-      .nav {
-        margin: 20px;
-        display: none;
+      .login-box {
+        max-width: 300px;
+        margin: 50px auto;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      .login-box h2 {
+        margin-bottom: 20px;
+      }
+      .login-box input {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .login-box button {
+        width: 100%;
+        padding: 10px;
+        background: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .login-box button:hover {
+        background: darkgreen;
       }
       .nav a {
         display: block;
@@ -38,132 +64,58 @@
       .nav a:hover {
         background-color: #0056b3;
       }
-      .login-box {
-        max-width: 300px;
-        margin: 20px auto;
-        padding: 20px;
-        background: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        text-align: left;
-      }
-      .login-box h3 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      input {
-        width: 90%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        display: block;
-      }
-      .login-btn,
-      .logout-btn {
-        width: 100%;
-        padding: 10px;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .login-btn {
-        background-color: #28a745;
-      }
-      .login-btn:hover {
-        background-color: #218838;
-      }
-      .logout-btn {
-        background-color: #dc3545;
-        margin-top: 20px;
-      }
-      .logout-btn:hover {
-        background-color: #c82333;
-      }
-      .error {
-        color: red;
-        display: none;
-        text-align: center;
-        margin-bottom: 10px;
-      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Galeri Aset Phincon</h1>
-
-      <!-- Login Form -->
-      <div class="login-box" id="login-box">
-        <h3>Silakan Login</h3>
-        <input
-          type="text"
-          id="username"
-          placeholder="Username"
-          required
-          autocomplete="off"
-        />
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          required
-          autocomplete="off"
-        />
-        <p class="error" id="error-message">Username atau password salah!</p>
-        <button class="login-btn" onclick="login()">Login</button>
+      <div id="loginBox" class="login-box">
+        <h2>Silakan Login</h2>
+        <input type="text" id="username" placeholder="Username" />
+        <input type="password" id="password" placeholder="Password" />
+        <button onclick="login()">Login</button>
       </div>
-
-      <!-- Navigasi Galeri & Logout Button -->
-      <div class="nav" id="gallery-nav">
+      <div id="gallery" style="display: none">
         <p>Pilih salah satu galeri berikut:</p>
-        <a href="Kokas.zip">Kokas Galeri</a>
-        <a href="Batavia.zip">Batavia Galeri</a>
-        <a href="Gancit.zip">Gancit Galeri</a>
-        <button class="logout-btn" onclick="logout()">Logout</button>
+        <div class="nav">
+          <a href="Kokas.zip">Kokas Galeri</a>
+          <a href="Batavia.zip">Batavia Galeri</a>
+          <a href="Gancit.zip">Gancit Galeri</a>
+        </div>
+        <button onclick="logout()">Logout</button>
       </div>
     </div>
-
     <script>
-      // Cek apakah user sudah login sebelumnya
-      window.onload = function () {
-        if (sessionStorage.getItem("loggedIn") === "true") {
-          showGallery();
-        } else {
-          logout(); // Hapus cache login jika ada
-        }
-      };
+      const encodedUsername = "UGhpbmNvbg==";
+      const encodedPassword = "R0EyMDI1";
 
       function login() {
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+        const userInput = btoa(document.getElementById("username").value);
+        const passInput = btoa(document.getElementById("password").value);
 
-        if (username === "Phincon" && password === "GA2025") {
-          sessionStorage.setItem("loggedIn", "true");
-          showGallery();
+        if (userInput === encodedUsername && passInput === encodedPassword) {
+          sessionStorage.setItem("loggedIn", true);
+          document.getElementById("loginBox").style.display = "none";
+          document.getElementById("gallery").style.display = "block";
         } else {
-          document.getElementById("error-message").style.display = "block";
+          alert("Username atau Password salah");
         }
       }
 
       function logout() {
         sessionStorage.removeItem("loggedIn");
-        document.getElementById("gallery-nav").style.display = "none";
-        document.getElementById("login-box").style.display = "block";
-
-        // Hapus cache input username & password
+        document.getElementById("gallery").style.display = "none";
+        document.getElementById("loginBox").style.display = "block";
         document.getElementById("username").value = "";
         document.getElementById("password").value = "";
-
-        // Sembunyikan pesan error jika ada
-        document.getElementById("error-message").style.display = "none";
       }
 
-      function showGallery() {
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("gallery-nav").style.display = "block";
-      }
+      window.onload = function () {
+        if (sessionStorage.getItem("loggedIn")) {
+          document.getElementById("loginBox").style.display = "none";
+          document.getElementById("gallery").style.display = "block";
+        }
+      };
     </script>
   </body>
 </html>
