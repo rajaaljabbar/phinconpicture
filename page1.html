@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeri Foto Kokas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      .gallery img {
+        width: 100%;
+        height: auto;
+        max-width: 250px;
+        border-radius: 10px;
+      }
+      .gallery p {
+        font-size: 14px;
+        color: #333;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+      .nav {
+        margin: 20px;
+      }
+      .nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+      }
+      .download-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Foto Aset Phincon</h1>
+      <div class="nav">
+        <a href="index.html">Back To Main Menu</a>
+      </div>
+      <div class="nav">
+        <a href="page1.html">Office 88, Kokas</a>
+        <a href="page2.html">Batavia Tower</a>
+        <a href="page3.html">Office 8, Gancit</a>
+      </div>
+      <div class="gallery">
+        <img src="img/Kokas/RuangKerja-Kokas.jpeg" alt="Kokas 1" />
+        <p>Meja Kursi Kerja</p>
+        <img src="img/Kokas/Meja Kursi Direktur.jpeg" alt="Kokas 2" />
+        <p>Meja Kursi Direktur</p>
+        <img src="img/Kokas/Device Apple.jpeg" alt="Kokas 3" />
+        <p>Device Apple</p>
+        <img src="img/Kokas/Device Windows.jpeg" alt="Kokas 4" />
+        <p>Device Windows</p>
+        <img src="img/Kokas/IP Phone.jpeg" alt="Kokas 5" />
+        <p>IP Phone</p>
+        <img src="img/Kokas/Lemari Dokumen.jpeg" alt="Kokas 6" />
+        <p>Lemari Dokumen</p>
+        <img src="img/Kokas/Lemari 2 P.jpeg" alt="Kokas 7" />
+        <p>Lemari Pendek</p>
+        <img src="img/Kokas/Lemari 2 T.jpeg" alt="Kokas 8" />
+        <p>Lemari Tinggi</p>
+        <img src="img/Kokas/Locker.jpeg" alt="Kokas 9" />
+        <p>Locker</p>
+        <img src="img/Kokas/Mesin Fotocopy.jpeg" alt="Kokas 10" />
+        <p>Mesin Fotocopy</p>
+        <img src="img/Kokas/Printer HP.jpeg" alt="Kokas 11" />
+        <p>Printer</p>
+        <img src="img/Kokas/Kulkas.jpeg" alt="Kokas 12" />
+        <p>Kulkas</p>
+        <img src="img/Kokas/Dispenser.jpeg" alt="Kokas 13" />
+        <p>Dispenser</p>
+        <img src="img/Kokas/Microwave.jpeg" alt="Kokas 14" />
+        <p>Microwave</p>
+        <img src="img/Kokas/Kipas Angin.jpeg" alt="Kokas 15" />
+        <p>Kipas Angin</p>
+        <img src="img/Kokas/Infocus.jpeg" alt="Kokas 16" />
+        <p>Infocus</p>
+        <img src="img/Kokas/Unify.jpeg" alt="Kokas 17" />
+        <p>Unify Router</p>
+      </div>
+      <script>
+        const currentPage = window.location.pathname;
+        if (currentPage.includes("page1.html")) {
+          document.write(
+            '<a href="Kokas.zip" class="download-btn" download>Download Kokas Galeri</a>'
+          );
+        } else if (currentPage.includes("page2.html")) {
+          document.write(
+            '<a href="Batavia.zip" class="download-btn" download>Download Batavia Galeri</a>'
+          );
+        } else if (currentPage.includes("page3.html")) {
+          document.write(
+            '<a href="Gancit.zip" class="download-btn" download>Download Gancit Galeri</a>'
+          );
+        }
+      </script>
+    </div>
+  </body>
+</html>
